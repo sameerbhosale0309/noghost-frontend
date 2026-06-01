@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Layout from "../components/layout";
 import { motion } from "motion/react";
+import http from "../api/http";
 import { 
   Wallet, 
   Workflow, 
@@ -15,12 +16,38 @@ import {
 export default function Home() {
   const { user, loading } = useAuth();
   const nav = useNavigate();
+  const [stats, setStats] = useState({
+    totalEscrowProtected: 0,
+    securedProjects: 0,
+    disputelessRate: 100.0,
+    antiGhostingSafe: 100
+  });
 
   useEffect(() => {
     if (!loading && user) {
       nav(user.role === "client" ? "/client" : "/freelancer", { replace: true });
     }
   }, [user, loading, nav]);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await http.get("/projects/public-stats");
+        setStats(res.data);
+      } catch (err) {
+        console.error("Failed to fetch public stats:", err);
+      }
+    };
+    fetchStats();
+  }, []);
+
+  const formatEscrow = (val) => {
+    return `$${val.toLocaleString()}`;
+  };
+
+  const formatProjects = (val) => {
+    return val.toLocaleString();
+  };
 
   return (
     <Layout fullWidth={true}>
@@ -119,7 +146,7 @@ export default function Home() {
                 gap: "8px"
               }}>
                 <ShieldCheck size={16} />
-                <span>Securing $10M+ in freelance milestone contracts globally.</span>
+                <span>Securing {formatEscrow(stats.totalEscrowProtected)} in freelance milestone contracts globally.</span>
               </div>
             </motion.div>
 
@@ -452,19 +479,19 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <div style={{ textAlign: "center" }}>
-              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>$10M+</h3>
+              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>{formatEscrow(stats.totalEscrowProtected)}</h3>
               <p className="muted" style={{ margin: "4px 0 0 0", fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em" }}>Escrow Protected</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>50k+</h3>
+              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>{formatProjects(stats.securedProjects)}</h3>
               <p className="muted" style={{ margin: "4px 0 0 0", fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em" }}>Secured Projects</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>99.9%</h3>
+              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>{stats.disputelessRate}%</h3>
               <p className="muted" style={{ margin: "4px 0 0 0", fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em" }}>Disputeless Rate</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>100%</h3>
+              <h3 style={{ fontSize: "2.2rem", fontWeight: 900, fontFamily: "Outfit", color: "#1a1a2e", margin: 0 }}>{stats.antiGhostingSafe}%</h3>
               <p className="muted" style={{ margin: "4px 0 0 0", fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em" }}>Anti-Ghosting Safe</p>
             </div>
           </motion.div>
