@@ -236,7 +236,9 @@ a {
   width: calc(100% - 48px);
   margin: 24px auto;
   padding: 48px 24px 24px 24px;
-  background: #FCFBF9;
+  background: rgba(252, 251, 249, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: 32px;
   box-shadow: 
     0 24px 72px rgba(26, 46, 36, 0.08), 
@@ -709,4 +711,153 @@ hr {
     padding: 6px 12px !important;
     font-size: 13px !important;
   }
+}
+
+/* Animated Wavy Vector Background and grid overlays */
+.animated-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, #F4FAF6 0%, #D4ECE0 100%);
+  overflow: hidden;
+}
+
+.bg-wave {
+  position: absolute;
+  width: 200vw;
+  height: 120vh;
+  left: -50vw;
+  bottom: -40vh;
+  transform-origin: bottom center;
+}
+
+.bg-wave-1 {
+  fill: #1D3A2F;
+  opacity: 0.12;
+  animation: waveAnim1 24s ease-in-out infinite;
+}
+
+.bg-wave-2 {
+  fill: #274D3E;
+  opacity: 0.15;
+  animation: waveAnim2 28s ease-in-out infinite;
+}
+
+.bg-wave-3 {
+  fill: #34614E;
+  opacity: 0.18;
+  animation: waveAnim3 32s ease-in-out infinite;
+}
+
+.bg-wave-4 {
+  fill: #4F8069;
+  opacity: 0.22;
+  animation: waveAnim4 20s ease-in-out infinite;
+}
+
+.bg-wave-5 {
+  fill: #7FA894;
+  opacity: 0.35;
+  animation: waveAnim5 26s ease-in-out infinite;
+}
+
+.bg-wave-6 {
+  fill: #A8CBB8;
+  opacity: 0.60;
+  animation: waveAnim6 22s ease-in-out infinite;
+}
+
+@keyframes waveAnim1 {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  50% { transform: translateY(-4vh) rotate(1deg) scaleY(1.05); }
+}
+
+@keyframes waveAnim2 {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  50% { transform: translateY(-3vh) rotate(-1deg) scaleY(0.97); }
+}
+
+@keyframes waveAnim3 {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleX(1); }
+  50% { transform: translateY(-5vh) rotate(1.5deg) scaleX(1.03); }
+}
+
+@keyframes waveAnim4 {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  50% { transform: translateY(-3.5vh) rotate(-1.5deg) scaleY(1.02); }
+}
+
+@keyframes waveAnim5 {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  50% { transform: translateY(-4.5vh) rotate(0.8deg) scaleY(0.96); }
+}
+
+@keyframes waveAnim6 {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  50% { transform: translateY(-2.5vh) rotate(-0.8deg) scaleY(1.02); }
+}
+
+/* 3D Isometric Grid Overlay Styles */
+.bg-grid-isometric {
+  position: absolute;
+  pointer-events: none;
+}
+
+.bg-grid-isometric-left {
+  bottom: 8vh;
+  left: -2vw;
+  width: min(350px, 32vw);
+  height: auto;
+  opacity: 0.55;
+  animation: gridFloatLeft 18s ease-in-out infinite alternate;
+}
+
+.bg-grid-isometric-right {
+  bottom: 4vh;
+  right: 12vw;
+  width: min(420px, 38vw);
+  height: auto;
+  opacity: 0.45;
+  animation: gridFloatRight 22s ease-in-out infinite alternate;
+}
+
+@keyframes gridFloatLeft {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes gridFloatRight {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-15px) rotate(-1.5deg); }
+}
+
+/* Cloud Computing Tech Diagram Styles */
+.bg-cloud-diagram {
+  position: absolute;
+  top: 6vh;
+  right: 3vw;
+  width: min(240px, 22vw);
+  height: auto;
+  opacity: 0.65;
+  animation: cloudPulse 15s ease-in-out infinite;
+}
+
+@keyframes cloudPulse {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.65; }
+  50% { transform: translateY(-8px) scale(1.02); opacity: 0.8; }
+}
+
+/* Sparkle Star Shape Styles */
+.bg-sparkle-star {
+  position: absolute;
+  bottom: 12vh;
+  right: 8vw;
+  width: 48px;
+  height: 48px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95));
 }
