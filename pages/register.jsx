@@ -43,21 +43,8 @@ export default function Register() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          {/* Logo Brand Emblem */}
+          {/* Logo Brand Title */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "16px" }}>
-            <div style={{
-              width: "48px",
-              height: "48px",
-              borderRadius: "50%",
-              background: "#1a1a2e",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-              marginBottom: "8px"
-            }}>
-              <span style={{ color: "#ffffff", fontFamily: "'Outfit', sans-serif", fontSize: "20px", fontWeight: 900 }}>NG</span>
-            </div>
             <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "1.8rem", fontWeight: 900, color: "#1a1a2e", margin: 0 }}>NoGhost</h2>
             <p className="muted" style={{ margin: "4px 0 0 0", fontSize: "13px", fontWeight: 500 }}>Create your secured account</p>
           </div>
