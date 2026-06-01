@@ -2,6 +2,8 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { motion } from "motion/react";
 
+const MotionNavLink = motion(NavLink);
+
 export default function Navbar() {
   const { user, logout } = useAuth();
   const nav = useNavigate();
@@ -83,9 +85,11 @@ export default function Navbar() {
         <div className="nav-left" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           {renderBrandLogo(() => nav("/"))}
 
-          <NavLink to="/" className={linkClass}>
-            home
-          </NavLink>
+          {!user ? (
+            <NavLink to="/" className={linkClass}>
+              home
+            </NavLink>
+          ) : null}
 
           {user?.role === "client" ? (
             <NavLink to="/client" className={linkClass}>
@@ -126,14 +130,31 @@ export default function Navbar() {
               </motion.button>
             </>
           ) : (
-            <>
-              <NavLink to="/login" className={linkClass}>
-                login
+            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+              <NavLink to="/login" className="interactive-hover-btn interactive-hover-btn-login">
+                <span className="interactive-hover-btn-text">login</span>
+                <span className="interactive-hover-btn-dot"></span>
+                <div className="interactive-hover-btn-hover-content">
+                  <span>login</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "transform 0.3s ease" }}>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
               </NavLink>
-              <NavLink to="/register" className={linkClass}>
-                register
+
+              <NavLink to="/register" className="interactive-hover-btn interactive-hover-btn-register">
+                <span className="interactive-hover-btn-text">register</span>
+                <span className="interactive-hover-btn-dot"></span>
+                <div className="interactive-hover-btn-hover-content">
+                  <span>register</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "transform 0.3s ease" }}>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
               </NavLink>
-            </>
+            </div>
           )}
         </div>
       </div>

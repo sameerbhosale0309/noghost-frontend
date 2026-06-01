@@ -733,6 +733,7 @@ hr {
   left: -50vw;
   bottom: -40vh;
   transform-origin: bottom center;
+  pointer-events: none !important;
 }
 
 .bg-wave-1 {
@@ -844,6 +845,7 @@ hr {
   height: auto;
   opacity: 0.65;
   animation: cloudPulse 15s ease-in-out infinite;
+  pointer-events: none !important;
 }
 
 @keyframes cloudPulse {
@@ -860,4 +862,130 @@ hr {
   height: 48px;
   opacity: 0.85;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95));
+  pointer-events: none !important;
+}
+
+/* Interactive Hover Button from Magic UI styling */
+.interactive-hover-btn {
+  position: relative;
+  width: auto;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 99px;
+  padding: 8px 24px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  border: 1px solid rgba(26, 26, 46, 0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.65);
+  color: #1a1a2e;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.interactive-hover-btn-text {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.interactive-hover-btn:hover .interactive-hover-btn-text {
+  transform: translateX(-14px);
+  opacity: 0;
+}
+
+.interactive-hover-btn-hover-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transform: translateX(18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  z-index: 10;
+  transition: all 0.3s ease;
+  color: white;
+  pointer-events: none;
+}
+
+.interactive-hover-btn:hover .interactive-hover-btn-hover-content {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.interactive-hover-btn-dot {
+  position: absolute;
+  left: 16px;
+  top: calc(50% - 3px);
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  z-index: 5;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Variant 1: Login (White/Glassmorphic, dot is charcoal, expands to charcoal bg) */
+.interactive-hover-btn-login {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(26, 26, 46, 0.15);
+  color: #1a1a2e;
+  padding-left: 32px;
+}
+
+.interactive-hover-btn-login .interactive-hover-btn-dot {
+  background: #1a1a2e;
+}
+
+.interactive-hover-btn-login:hover {
+  border-color: #1a1a2e;
+}
+
+.interactive-hover-btn-login:hover .interactive-hover-btn-dot {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  transform: scale(1.8);
+  border-radius: 0;
+  background: #1a1a2e;
+}
+
+/* Variant 2: Register (Dark navy, dot is white, expands to beautiful white bg on hover) */
+.interactive-hover-btn-register {
+  background: #1a1a2e;
+  border-color: transparent;
+  color: white;
+  padding-left: 32px;
+  box-shadow: 0 4px 12px rgba(26, 26, 46, 0.12);
+}
+
+.interactive-hover-btn-register .interactive-hover-btn-dot {
+  background: #ffffff;
+}
+
+.interactive-hover-btn-register .interactive-hover-btn-hover-content {
+  color: #1a1a2e;
+}
+
+.interactive-hover-btn-register:hover .interactive-hover-btn-dot {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  transform: scale(1.8);
+  border-radius: 0;
+  background: #ffffff;
+}
+
+.interactive-hover-btn-register:hover {
+  border-color: #1a1a2e;
+  box-shadow: 0 6px 16px rgba(26, 26, 46, 0.15);
 }
